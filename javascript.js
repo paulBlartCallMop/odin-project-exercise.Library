@@ -14,3 +14,25 @@ function addBookToLibrary(title,author,pages,isRead) {
     const newBook = new Book(title,author,pages,isRead);
     myLibrary.push(newBook);
 }
+
+function displayLibrary() {
+    const bookContainer = document.querySelector('.bookContainer');
+    myLibrary.forEach((book) => {
+        const bookElement = document.createElement('div');
+        const title = document.createElement('h1');
+        const info = document.createElement('ul');
+
+        bookElement.classList.add('book');
+        title.textContent = book.title;
+        for (const detail in book) {
+            if (detail != 'title' && detail != 'info') {
+                const detailElement = document.createElement('li');
+                detailElement.textContent = `${detail}: ${book[detail]}`;
+                info.appendChild(detailElement);
+            }
+        }
+        bookElement.appendChild(title);
+        bookElement.appendChild(info);
+        bookContainer.appendChild(bookElement);
+    });
+}
