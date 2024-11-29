@@ -28,6 +28,7 @@ function displayLibrary() {
         const title = document.createElement('h1');
         const info = document.createElement('ul');
         const removeButton = document.createElement('button');
+        const readButton = document.createElement('button');
 
         bookElement.classList.add('book');
         bookElement.id = index;
@@ -39,10 +40,12 @@ function displayLibrary() {
                 info.appendChild(detailElement);
             }
         }
+        readButton.textContent = (book['isRead'] === 'yes') ? 'Mark Unread' : 'Mark Read';
         removeButton.textContent = 'remove';
         
         bookElement.appendChild(title);
         bookElement.appendChild(info);
+        bookElement.appendChild(readButton);
         bookElement.appendChild(removeButton);
         bookContainer.appendChild(bookElement);
     });
@@ -54,12 +57,12 @@ newBookButton.addEventListener('click', () => {
     const title = info[0].value;
     const author = info[1].value;
     const pages = info[2].value;
-    const isRead = info[3].checked;
+    const isRead = info[3].checked ? 'yes' : 'no';
     addBookToLibrary(title,author,pages,isRead);
     displayLibrary();
 })
 
 bookContainer.addEventListener('click',(event)=>{
-    myLibrary.splice(parseInt(event.target.id),1);
+    myLibrary.splice(parseInt(event.target.parentElement.id),1);
     displayLibrary();
 })
