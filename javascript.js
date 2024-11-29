@@ -41,7 +41,7 @@ function displayLibrary() {
             }
         }
         readButton.textContent = (book['isRead'] === 'yes') ? 'Mark Unread' : 'Mark Read';
-        removeButton.textContent = 'remove';
+        removeButton.textContent = 'Remove';
         
         bookElement.appendChild(title);
         bookElement.appendChild(info);
@@ -63,6 +63,11 @@ newBookButton.addEventListener('click', () => {
 })
 
 bookContainer.addEventListener('click',(event)=>{
-    myLibrary.splice(parseInt(event.target.parentElement.id),1);
+    if (event.target.textContent === 'Remove') {
+        myLibrary.splice(parseInt(event.target.parentElement.id),1);
+    } else {
+        myLibrary[parseInt(event.target.parentElement.id)]['isRead'] = (myLibrary[parseInt(event.target.parentElement.id)]['isRead'] === 'yes') ? 'no':'yes';
+    }
+
     displayLibrary();
 })
