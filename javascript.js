@@ -23,13 +23,14 @@ function displayLibrary() {
         bookContainer.removeChild(child);
         child = bookContainer.lastElementChild;
     }
-    myLibrary.forEach((book) => {
+    myLibrary.forEach((book,index) => {
         const bookElement = document.createElement('div');
         const title = document.createElement('h1');
         const info = document.createElement('ul');
         const removeButton = document.createElement('button');
 
         bookElement.classList.add('book');
+        bookElement.id = index;
         title.textContent = book.title;
         for (const detail in book) {
             if (detail != 'title' && detail != 'info') {
@@ -59,7 +60,6 @@ newBookButton.addEventListener('click', () => {
 })
 
 bookContainer.addEventListener('click',(event)=>{
-    const button = event.target;
-    button.parentNode.remove();
-    
+    myLibrary.splice(parseInt(event.target.id),1);
+    displayLibrary();
 })
