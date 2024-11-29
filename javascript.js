@@ -17,6 +17,11 @@ function addBookToLibrary(title,author,pages,isRead) {
 
 function displayLibrary() {
     const bookContainer = document.querySelector('.bookContainer');
+    let child = bookContainer.lastElementChild;
+    while (child) {
+        bookContainer.removeChild(child);
+        child = bookContainer.lastElementChild;
+    }
     myLibrary.forEach((book) => {
         const bookElement = document.createElement('div');
         const title = document.createElement('h1');
@@ -36,3 +41,14 @@ function displayLibrary() {
         bookContainer.appendChild(bookElement);
     });
 }
+
+const newBookButton = document.querySelector('form button');
+newBookButton.addEventListener('click', () => {
+    const info = document.querySelectorAll('form input');
+    const title = info[0].value;
+    const author = info[1].value;
+    const pages = info[2].value;
+    const isRead = info[3].checked;
+    addBookToLibrary(title,author,pages,isRead);
+    displayLibrary();
+})
