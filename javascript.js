@@ -15,8 +15,9 @@ function addBookToLibrary(title,author,pages,isRead) {
     myLibrary.push(newBook);
 }
 
+const bookContainer = document.querySelector('.bookContainer');
+
 function displayLibrary() {
-    const bookContainer = document.querySelector('.bookContainer');
     let child = bookContainer.lastElementChild;
     while (child) {
         bookContainer.removeChild(child);
@@ -26,6 +27,7 @@ function displayLibrary() {
         const bookElement = document.createElement('div');
         const title = document.createElement('h1');
         const info = document.createElement('ul');
+        const removeButton = document.createElement('button');
 
         bookElement.classList.add('book');
         title.textContent = book.title;
@@ -36,8 +38,11 @@ function displayLibrary() {
                 info.appendChild(detailElement);
             }
         }
+        removeButton.textContent = 'remove';
+        
         bookElement.appendChild(title);
         bookElement.appendChild(info);
+        bookElement.appendChild(removeButton);
         bookContainer.appendChild(bookElement);
     });
 }
@@ -51,4 +56,10 @@ newBookButton.addEventListener('click', () => {
     const isRead = info[3].checked;
     addBookToLibrary(title,author,pages,isRead);
     displayLibrary();
+})
+
+bookContainer.addEventListener('click',(event)=>{
+    const button = event.target;
+    button.parentNode.remove();
+    
 })
