@@ -27,6 +27,7 @@ function displayLibrary() {
         const bookElement = document.createElement('div');
         const title = document.createElement('h1');
         const info = document.createElement('ul');
+        const buttons = document.createElement('div');
         const removeButton = document.createElement('button');
         const readButton = document.createElement('button');
 
@@ -45,8 +46,9 @@ function displayLibrary() {
         
         bookElement.appendChild(title);
         bookElement.appendChild(info);
-        bookElement.appendChild(readButton);
-        bookElement.appendChild(removeButton);
+        buttons.appendChild(readButton);
+        buttons.appendChild(removeButton);
+        bookElement.appendChild(buttons);
         bookContainer.appendChild(bookElement);
     });
 }
